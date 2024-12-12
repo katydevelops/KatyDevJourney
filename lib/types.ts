@@ -1,11 +1,11 @@
-type ContentfulResponse<T> = {
+export type ContentfulResponse<T> = {
     items: T[];
     total: number;
     skip: number;
     limit: number;
 };
 
-type BlogPost = {
+export type BlogPost = {
     fields: {
         slug: string;
         title: string;
