@@ -12,7 +12,3 @@ export type BlogPost = {
         content: string;
     };
 };
-
-const { items: posts }: ContentfulResponse<BlogPost> = await client.getEntries({
-    content_type: 'blogPost',
-})
