@@ -5,7 +5,7 @@ export const revalidate = 3600;
 
 export default async function Home() {
   const { items: posts }: ContentfulResponse<BlogPost> = await client.getEntries({
-    content_type: 'blogPost',
+    content_type: 'pageBlogPost',
   });
 
 
