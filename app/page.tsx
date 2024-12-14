@@ -6,7 +6,7 @@ export const revalidate = 3600; // ISR: Revalidate every hour
 export default async function Home() {
   // Fetch entries from Contentful without overriding the type
   const { items: posts } = await client.getEntries({
-    content_type: 'pageBlogPost', // Replace with your Contentful content type ID
+    content_type: 'pageBlogPost', 
   });
 
   return (
