@@ -1,13 +1,18 @@
 import { client } from '../lib/contentful';
+import { Entry } from 'contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'; 
+import { BlogPostFields } from '@/lib/types';
 
 export const revalidate = 3600; // ISR: Revalidate every hour
 
-export default async function Home() {
-  // Fetch entries from Contentful without overriding the type
-  const { items: posts } = await client.getEntries({
-    content_type: 'pageBlogPost', 
-  });
+const { items: posts } = await client.getEntries<Entry<BlogPostFields>>({
+  content_type: 'pageBlogPost', 
+});
+
+// export default async function Home() {
+//   const { items: posts } = await client.getEntries({
+//     content_type: 'pageBlogPost', 
+//   });
 
   return (
     <main className="max-w-4xl mx-auto p-6">
