@@ -11,6 +11,12 @@ export default async function Home({searchParams}: {searchParams: {page?: string
     content_type: 'pageBlogPost', // Content Type ID in Contentful
   });
 
+// Return the 3 most recent blog posts and keep posts 3 to a page max
+const postsPerPage = 3;
+const currentPage = Number(searchParams.page) || 1;
+const startIndex = (currentPage - 1) * postsPerPage;
+const endIndex = startIndex + postsPerPage;
+
   return (
     <main className="max-w-4xl mx-auto p-6">
       <h1 className="text-4xl font-bold mb-6">Welcome!</h1>
