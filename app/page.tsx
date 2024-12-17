@@ -17,11 +17,14 @@ const currentPage = Number(searchParams.page) || 1;
 const startIndex = (currentPage - 1) * postsPerPage;
 const endIndex = startIndex + postsPerPage;
 
+const paginatedPages = posts.slice(startIndex, endIndex);
+const totalPages = Math.ceil(posts.length / postsPerPage)
+
   return (
     <main className="max-w-4xl mx-auto p-6">
       <h1 className="text-4xl font-bold mb-6">Welcome!</h1>
       <ul className="space-y-6">
-        {posts.map((post) => {
+        {paginatedPages.map((post) => {
           const { title, content, subtitle, publishedDate } = post.fields;
 
           return (
@@ -38,6 +41,14 @@ const endIndex = startIndex + postsPerPage;
           );
         })}
       </ul>
+
+      <div className="flex justify-between mt-8">
+        {currentPage > 1 && (
+          <a href={`?page=${currentPage - 1}`}
+          className="text-blue-500 hover:underline">Next →
+          </a>
+        )}
+      </div>
     </main>
   );
 }
