@@ -5,7 +5,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
 export const revalidate = 3600; // ISR: Revalidate every hour
 
-export default async function Home({searchParams}: {searchParams: {page?: string}; }) {
+export default async function Home({searchParams ={} }: {searchParams: {page?: string}; }) {
   // Fetch blog posts
   const { items: posts } = await client.getEntries<Entry<BlogPostFields>>({
     content_type: 'pageBlogPost', // Content Type ID in Contentful
