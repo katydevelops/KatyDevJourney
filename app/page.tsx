@@ -13,7 +13,7 @@ export default async function Home({searchParams}: {searchParams: {page?: string
 
 // Return the 3 most recent blog posts and keep posts 3 to a page max
 const postsPerPage = 3;
-const currentPage = Number(searchParams.page) || 1;
+const currentPage = Number(searchParams?.page) || 1;
 const startIndex = (currentPage - 1) * postsPerPage;
 const endIndex = startIndex + postsPerPage;
 
