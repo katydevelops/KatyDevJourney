@@ -4,21 +4,29 @@ import { BlogPostFields } from '@/lib/types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'; // Rich text renderer
 
 export const revalidate = 3600; // ISR: Revalidate every hour
+export const dynamic = 'force-dynamic';
 
-export default async function Home({searchParams ={} }: {searchParams: {page?: string}; }) {
-  // Fetch blog posts
+
+export default async function Home({
+  searchParams = {}, // Default to an empty object
+}: {
+  searchParams?: { page?: string }; // Optional `page` query param
+}) {
+  const resolvedSearchParams = await searchParams;
   const { items: posts } = await client.getEntries<Entry<BlogPostFields>>({
     content_type: 'pageBlogPost', // Content Type ID in Contentful
   });
 
-// Return the 3 most recent blog posts and keep posts 3 to a page max
-const postsPerPage = 3;
-const currentPage = Number(searchParams?.page) || 1;
-const startIndex = (currentPage - 1) * postsPerPage;
-const endIndex = startIndex + postsPerPage;
+  // Return the 3 most recent blog posts and keep posts 3 to a page max
+  const postsPerPage = 3;
+  const currentPage = Number(resolvedSearchParams.page) || 1;
+  console.log('Search Params:', searchParams);
+  console.log('Current Page:', currentPage);
+  const startIndex = (currentPage - 1) * postsPerPage;
+  const endIndex = startIndex + postsPerPage;
 
-const paginatedPages = posts.slice(startIndex, endIndex);
-const totalPages = Math.ceil(posts.length / postsPerPage)
+  const paginatedPages = posts.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(posts.length / postsPerPage);
 
   return (
     <main className="max-w-4xl mx-auto p-6">
@@ -34,9 +42,7 @@ const totalPages = Math.ceil(posts.length / postsPerPage)
               <p className="text-gray-400 text-xs">
                 Published on: {new Date(publishedDate).toLocaleDateString()}
               </p>
-              <div className="prose">
-                {documentToReactComponents(content)}
-              </div>
+              <div className="prose">{documentToReactComponents(content)}</div>
             </li>
           );
         })}
@@ -44,13 +50,19 @@ const totalPages = Math.ceil(posts.length / postsPerPage)
 
       <div className="flex justify-between mt-8">
         {currentPage > 1 && (
-          <a href={`?page=${currentPage -1}`}
-          className="text-blue-500 hover:underline"
-          >← Previous</a>
-        )} 
+          <a
+            href={`?page=${currentPage - 1}`}
+            className="text-blue-500 hover:underline"
+          >
+            ← Previous
+          </a>
+        )}
         {currentPage < totalPages && (
-          <a href={`?page=${currentPage - 1}`}
-          className="text-blue-500 hover:underline">Next →
+          <a
+            href={`?page=${currentPage + 1}`}
+            className="text-blue-500 hover:underline"
+          >
+            Next →
           </a>
         )}
       </div>
