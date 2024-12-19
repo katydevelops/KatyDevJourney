@@ -44,6 +44,11 @@ const totalPages = Math.ceil(posts.length / postsPerPage)
 
       <div className="flex justify-between mt-8">
         {currentPage > 1 && (
+          <a href={`?page=${currentPage -1}`}
+          className="text-blue-500 hover:underline"
+          >← Previous</a>
+        )} 
+        {currentPage < totalPages && (
           <a href={`?page=${currentPage - 1}`}
           className="text-blue-500 hover:underline">Next →
           </a>
