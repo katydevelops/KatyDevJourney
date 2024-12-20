@@ -22,17 +22,17 @@ export default async function Home({ searchParams = {} }: { searchParams?: { pag
   const totalPages = Math.ceil(posts.length / postsPerPage);
 
   return (
-    <main className="max-w-4xl mx-auto p-6 font-code">
-      <h1 className="text-4xl font-bold mb-6 text-accent">Welcome to My Blog</h1>
+    <main className="max-w-4xl mx-auto p-6">
+      <h1 className="text-5xl font-bold text-accent text-center mb-6">Welcome to My Blog</h1>
       <ul className="space-y-6">
         {paginatedPages.map((post) => {
           const { title, content, subtitle, publishedDate } = post.fields;
 
           return (
-            <li key={post.sys.id} className="border panel rounded shadow hover:shadow-lg">
-              <h2 className="text-2xl font-semibold text-foreground">{title}</h2>
-              <p className="text-muted text-sm">{subtitle || 'No subtitle available.'}</p>
-              <p className="text-muted text-xs">
+            <li key={post.sys.id} className="card">
+              <h2 className="text-3xl font-semibold text-purpleAccent ">{title}</h2>
+              <p className="text-muted text-subtitle text-sm">{subtitle || 'No subtitle available.'}</p>
+              <p className="text-yellowAccent text-xs">
                 Published on: {new Date(publishedDate).toLocaleDateString()}
               </p>
               <div className="prose">{documentToReactComponents(content)}</div>
@@ -43,7 +43,7 @@ export default async function Home({ searchParams = {} }: { searchParams?: { pag
 
       <div className="flex justify-between mt-8">
         {currentPage > 1 && (
-          <a href={`?page=${currentPage - 1}`} className="text-accent hover:underline">
+          <a href={`?page=${currentPage - 1}`} className="text-subtitle hover:underline">
             ← Previous
           </a>
         )}

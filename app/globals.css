@@ -3,65 +3,62 @@
 @tailwind utilities;
 
 :root {
-  --background: #1E1E1E; /* Dark gray */
-  --panel-bg: #252526; /* VS Code's panels */
-  --foreground: #D4D4D4; /* Light gray text */
-  --accent: #00FFCC; /* Vibrant cyan */
-  --muted: #757575; /* Muted gray */
+  --background: #1E1E1E;
+  --foreground: #6A9955; /* Default text color: Green */
+  --orange: #CE9178;
+  --green: #6A9955;
+  --yellow: #DCDCAA;
+  --purple: #C586C0;
+  --panel-bg: #252526;
 }
 
 body {
-  font-family: 'Fira Code', Consolas, Courier, monospace;
   background: var(--background);
-  color: var(--foreground);
+  color: var(--foreground); /* Default text is green */
+  font-family: "Fira Code", Consolas, "Courier New", monospace;
+  font-weight: bold; /* Make everything bold */
+}
+
+h1 {
+  color: var(--orange); /* Reddish-orange for main title */
+  text-align: center;
+  font-weight: bold;
+}
+
+h2 {
+  color: var(--purple); /* Blue headers */
+  font-weight: bold;
+}
+
+p {
+  color: var(--foreground); /* Default green for body text */
 }
 
 a {
-  color: var(--accent);
+  color: var(--green); /* Green links */
+  font-weight: bold;
   text-decoration: none;
 }
-
 a:hover {
+  color: var(--yellow); /* Yellow on hover */
   text-decoration: underline;
 }
 
-h1, h2, h3 {
-  color: var(--foreground);
-}
-
-ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-li {
-  border: 1px solid var(--panel-bg);
+.card {
   background: var(--panel-bg);
-  padding: 16px;
-  border-radius: 4px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-  margin-bottom: 12px;
-}
-
-.prose {
+  border-radius: 8px;
+  padding: 1.5rem;
   color: var(--foreground);
-  line-height: 1.6;
 }
 
 footer {
-  font-size: 14px;
-  color: var(--muted);
+  color: var(--yellow);
   text-align: center;
-  padding: 16px;
-  border-top: 1px solid var(--panel-bg);
+  margin-top: 2rem;
 }
 
 .blinking-cursor {
-  display: inline-block;
-  width: 10px;
-  background-color: var(--accent);
-  animation: blink 1s steps(2, start) infinite;
+  animation: blink 1s step-end infinite;
 }
 
 @keyframes blink {
