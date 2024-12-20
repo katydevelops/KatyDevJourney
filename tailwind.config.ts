@@ -9,10 +9,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "var(--background)", // Dark background
+        foreground: "var(--foreground)", // Light text
+        panel: "var(--panel-bg)", // Subtle panel background
+        accent: "var(--accent)", // Vibrant accent color
+        muted: "var(--muted)", // Muted text color
+      },
+      fontFamily: {
+        code: ["Fira Code", "Consolas", "Courier", "monospace"], // Code-style fonts
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")], // Add typography plugin
 } satisfies Config;
