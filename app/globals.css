@@ -66,3 +66,23 @@ footer {
     opacity: 0;
   }
 }
+
+section {
+  line-height: 1.6;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+.bg-panel-bg {
+  background-color: var(--panel-bg);
+}
+
+.shadow-lg {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.leading-relaxed {
+  line-height: 1.75;
+}

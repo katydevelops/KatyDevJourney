@@ -2,6 +2,7 @@ import { client } from '../lib/contentful';
 import { Entry } from 'contentful';
 import { BlogPostFields } from '@/lib/types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'; // Rich text renderer
+import AboutMe from './components/AboutMe';
 
 export const revalidate = 3600; // ISR: Revalidate every hour
 export const dynamic = 'force-dynamic';
@@ -24,6 +25,7 @@ export default async function Home({ searchParams = {} }: { searchParams?: { pag
   return (
     <main className="max-w-4xl mx-auto p-8 mt-6">
       <h1 className="text-5xl font-bold text-accent text-center mb-6">Welcome to My Blog</h1>
+      <AboutMe />
       <ul className="space-y-6">
         {paginatedPages.map((post) => {
           const { title, content, subtitle, publishedDate } = post.fields;
