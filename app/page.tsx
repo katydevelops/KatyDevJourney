@@ -22,7 +22,7 @@ export default async function Home({ searchParams = {} }: { searchParams?: { pag
   const totalPages = Math.ceil(posts.length / postsPerPage);
 
   return (
-    <main className="max-w-4xl mx-auto p-6">
+    <main className="max-w-4xl mx-auto p-8 mt-6">
       <h1 className="text-5xl font-bold text-accent text-center mb-6">Welcome to My Blog</h1>
       <ul className="space-y-6">
         {paginatedPages.map((post) => {
@@ -30,12 +30,12 @@ export default async function Home({ searchParams = {} }: { searchParams?: { pag
 
           return (
             <li key={post.sys.id} className="card">
-              <h2 className="text-3xl font-semibold text-purpleAccent ">{title}</h2>
-              <p className="text-muted text-subtitle text-sm">{subtitle || 'No subtitle available.'}</p>
+              <h2 className="text-3xl mt-2 font-semibold text-purpleAccent ">{title}</h2>
+              <p className="text-muted mt-2 text-subtitle text-sm">{subtitle || 'No subtitle available.'}</p>
               <p className="text-yellowAccent text-xs">
                 Published on: {new Date(publishedDate).toLocaleDateString()}
               </p>
-              <div className="prose">{documentToReactComponents(content)}</div>
+              <div className="prose mt-4">{documentToReactComponents(content)}</div>
             </li>
           );
         })}
