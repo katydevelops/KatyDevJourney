@@ -37,7 +37,7 @@ export default async function Home({ searchParams = {} }: { searchParams?: { pag
                   alt={`Featured image for ${title}`}
                   width={500}
                   height={300}
-                  className="rounded-lg mb-4"
+                  className="rounded-lg mb-10 mt-10 mx-auto"
                 />
               )}
               <h2 className="text-3xl mt-2 font-semibold text-purpleAccent">{title}</h2>
