@@ -3,6 +3,7 @@ import { Entry } from 'contentful';
 import { BlogPostFields } from '@/lib/types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Image from 'next/image';
+import AboutMe from './components/AboutMe';
 
 export const revalidate = 3600; // ISR: Revalidate every hour
 
@@ -23,6 +24,7 @@ export default async function Home({ searchParams = {} }: { searchParams?: { pag
   return (
     <main className="max-w-4xl mx-auto p-8 mt-6">
       <h1 className="text-5xl font-bold text-accent text-center mb-6">Welcome to My Blog</h1>
+      <AboutMe />
       <ul className="space-y-6">
         {paginatedPages.map((post: Entry<BlogPostFields>) => {
           const { title, content, subtitle, publishedDate, featuredImage } = post.fields;
