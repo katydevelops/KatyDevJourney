@@ -1,12 +1,10 @@
 import { client } from '../lib/contentful';
 import { Entry } from 'contentful';
 import { BlogPostFields } from '@/lib/types';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'; // Rich text renderer
-import AboutMe from './components/AboutMe';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import Image from 'next/image';
 
 export const revalidate = 3600; // ISR: Revalidate every hour
-export const dynamic = 'force-dynamic';
-
 
 export default async function Home({ searchParams = {} }: { searchParams?: { page?: string } }) {
   const resolvedSearchParams = await searchParams;
@@ -25,14 +23,22 @@ export default async function Home({ searchParams = {} }: { searchParams?: { pag
   return (
     <main className="max-w-4xl mx-auto p-8 mt-6">
       <h1 className="text-5xl font-bold text-accent text-center mb-6">Welcome to My Blog</h1>
-      <AboutMe />
       <ul className="space-y-6">
-        {paginatedPages.map((post) => {
-          const { title, content, subtitle, publishedDate } = post.fields;
+        {paginatedPages.map((post: Entry<BlogPostFields>) => {
+          const { title, content, subtitle, publishedDate, featuredImage } = post.fields;
 
           return (
             <li key={post.sys.id} className="card">
-              <h2 className="text-3xl mt-2 font-semibold text-purpleAccent ">{title}</h2>
+              {featuredImage?.fields?.file?.url && (
+                <Image
+                  src={`https:${featuredImage.fields.file.url}`}
+                  alt={`Featured image for ${title}`}
+                  width={500}
+                  height={300}
+                  className="rounded-lg mb-4"
+                />
+              )}
+              <h2 className="text-3xl mt-2 font-semibold text-purpleAccent">{title}</h2>
               <p className="text-muted mt-2 text-subtitle text-sm">{subtitle || 'No subtitle available.'}</p>
               <p className="text-yellowAccent text-xs">
                 Published on: {new Date(publishedDate).toLocaleDateString()}
@@ -55,13 +61,6 @@ export default async function Home({ searchParams = {} }: { searchParams?: { pag
           </a>
         )}
       </div>
-
-      <footer className="mt-12 border-t panel pt-4">
-        <p>
-          You're reading this in VS Blog. Made with ✨ and inspired by VS Code.
-          <span className="blinking-cursor"></span>
-        </p>
-      </footer>
     </main>
   );
 }
