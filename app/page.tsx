@@ -4,6 +4,7 @@ import { BlogPostFields } from '@/lib/types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Image from 'next/image';
 import AboutMe from './components/AboutMe';
+import Footer from './components/Footer'
 
 export const revalidate = 3600; // ISR: Revalidate every hour
 
@@ -63,6 +64,7 @@ export default async function Home({ searchParams = {} }: { searchParams?: { pag
           </a>
         )}
       </div>
+      <Footer />
     </main>
   );
 }
